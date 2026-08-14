@@ -1,0 +1,43 @@
+Listing
+│
+├── Basic Information
+│   ├── title
+│   └── description
+│
+├── Images
+│   └── multiple images
+│
+├── Pricing
+│   ├── price
+│   └── currency
+│
+├── Location
+│   ├── location
+│   ├── country
+│   └── latitude/longitude
+│
+├── Property
+│   ├── propertyType
+│   ├── guests
+│   ├── bedrooms
+│   ├── beds
+│   └── bathrooms
+│
+├── Amenities
+│
+├── Owner
+│   └── User reference
+│
+├── Reviews
+│   ├── rating
+│   └── reviewCount
+│
+├── Booking
+│   └── instantBooking
+│
+└── Status
+    ├── active
+    ├── inactive
+    ├── pending
+    └── blocked
+

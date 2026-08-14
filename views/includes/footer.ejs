@@ -1,0 +1,83 @@
+<footer>
+    <div class="container-fluid px-md-5">
+        <div class="row g-4 justify-content-between">
+            <!-- Brand Column -->
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <a href="/listings" class="text-decoration-none d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-hotel text-danger fs-3"></i>
+                        <span class="fs-4 fw-bold text-white">AirNet India</span>
+                    </a>
+                    <span class="badge bg-danger text-white rounded-pill px-2">v2.0</span>
+                </div>
+                <p class="small text-secondary mb-3" style="max-width: 320px;">
+                    India's leading tech-driven stay platform. Explore OYO rooms, luxury villas, mountain cabins, heritage havelis, and backwater houseboats across 500+ Indian destinations.
+                </p>
+                <div class="developer-badge mb-2">
+                    <i class="fa-solid fa-code text-warning"></i> Created by <strong class="text-white">Chaudhary Arpit Shailendra</strong>
+                </div>
+                <div class="text-secondary small mt-1">
+                    <i class="fa-solid fa-envelope text-danger me-1"></i> <a href="mailto:comega1410@gmail.com" class="text-white fw-semibold">comega1410@gmail.com</a>
+                </div>
+            </div>
+
+            <!-- Destinations Quick Links -->
+            <div class="col-lg-3 col-md-6 mb-3">
+                <h6 class="fw-bold text-white mb-3 text-uppercase tracking-wider" style="font-size: 0.82rem; letter-spacing:1px;">Popular Destinations in India</h6>
+                <ul class="list-unstyled small d-flex flex-wrap gap-2 m-0">
+                    <li><a href="/listings?state=Gujarat&city=Surat" class="badge bg-dark border text-light p-2 rounded-3">Surat</a></li>
+                    <li><a href="/listings?state=Gujarat&city=Ahmedabad" class="badge bg-dark border text-light p-2 rounded-3">Ahmedabad</a></li>
+                    <li><a href="/listings?state=Gujarat&city=Vadodara" class="badge bg-dark border text-light p-2 rounded-3">Vadodara</a></li>
+                    <li><a href="/listings?search=Goa" class="badge bg-dark border text-light p-2 rounded-3">Goa</a></li>
+                    <li><a href="/listings?search=Jaipur" class="badge bg-dark border text-light p-2 rounded-3">Jaipur</a></li>
+                    <li><a href="/listings?search=Manali" class="badge bg-dark border text-light p-2 rounded-3">Manali</a></li>
+                    <li><a href="/listings?search=Mumbai" class="badge bg-dark border text-light p-2 rounded-3">Mumbai</a></li>
+                    <li><a href="/listings?search=Bengaluru" class="badge bg-dark border text-light p-2 rounded-3">Bengaluru</a></li>
+                    <li><a href="/listings?search=Alleppey" class="badge bg-dark border text-light p-2 rounded-3">Alleppey</a></li>
+                </ul>
+            </div>
+
+            <!-- Services Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-3">
+                <h6 class="fw-bold text-white mb-3 text-uppercase tracking-wider" style="font-size: 0.82rem; letter-spacing:1px;">Stay Categories</h6>
+                <ul class="list-unstyled small space-y-2">
+                    <li class="mb-2"><a href="/listings?propertyType=OYO+Hotel"><i class="fa-solid fa-angle-right text-danger me-1"></i> OYO Hotels</a></li>
+                    <li class="mb-2"><a href="/listings?category=Villas"><i class="fa-solid fa-angle-right text-danger me-1"></i> Luxury Villas</a></li>
+                    <li class="mb-2"><a href="/listings?category=Hill+Stations"><i class="fa-solid fa-angle-right text-danger me-1"></i> Mountain Cabins</a></li>
+                    <li class="mb-2"><a href="/listings?category=Havelis"><i class="fa-solid fa-angle-right text-danger me-1"></i> Royal Havelis</a></li>
+                    <li class="mb-2"><a href="/listings?category=Houseboats"><i class="fa-solid fa-angle-right text-danger me-1"></i> Backwater Houseboats</a></li>
+                </ul>
+            </div>
+
+            <!-- Support & Currency Selector -->
+            <div class="col-lg-3 col-md-6 mb-3">
+                <h6 class="fw-bold text-white mb-3 text-uppercase tracking-wider" style="font-size: 0.82rem; letter-spacing:1px;">Preferences & Support</h6>
+                <p class="small text-secondary mb-3">Select your preferred currency for global booking.</p>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <!-- Airbnb Currency Selector Button -->
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-pill px-3 fw-bold" data-bs-toggle="modal" data-bs-target="#currencyModal">
+                        <i class="fa-solid fa-globe me-1"></i> <span class="active-currency-label">INR (₹)</span>
+                    </button>
+                    <a href="mailto:comega1410@gmail.com" class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold"><i class="fa-solid fa-headset me-1"></i> Support Desk</a>
+                </div>
+                <div class="d-flex gap-3 text-secondary fs-5">
+                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" title="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-credit-box d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 text-center text-md-start">
+            <div class="small text-secondary">
+                &copy; <%= new Date().getFullYear() %> <strong>AirNet Rental Platform</strong>. Crafted with excellence by <strong>Chaudhary Arpit Shailendra</strong> (<a href="mailto:comega1410@gmail.com" class="text-warning">comega1410@gmail.com</a>).
+            </div>
+            <div class="d-flex gap-4 small text-secondary">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Sanitization Standards</a>
+            </div>
+        </div>
+    </div>
+</footer>

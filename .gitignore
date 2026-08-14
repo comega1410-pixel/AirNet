@@ -1,0 +1,28 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Node Modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build Output
+dist/
+build/
+
+# Temporary Files
+tmp/
+temp/

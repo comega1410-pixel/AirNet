@@ -1,0 +1,55 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container my-5" style="max-width: 520px;">
+    <div class="form-card">
+        <div class="text-center mb-4">
+            <div class="bg-danger text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                <i class="fa-solid fa-user-plus fs-3"></i>
+            </div>
+            <h3 class="fw-bold mb-1">Create Your AirNet Account</h3>
+            <p class="text-muted small">Register today to grab an <strong>extra 10% OFF</strong> on your first stay!</p>
+        </div>
+
+        <form action="/signup" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label class="form-label fw-bold small">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fa-solid fa-user text-muted"></i></span>
+                    <input type="text" name="username" class="form-control rounded-end-3" placeholder="Choose a unique username" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fa-solid fa-envelope text-muted"></i></span>
+                    <input type="email" name="email" class="form-control rounded-end-3" placeholder="name@example.com" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold small">Mobile Phone Number (for OTP)</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light">+91</span>
+                    <input type="tel" name="phone" class="form-control rounded-end-3" placeholder="10-digit mobile number" required>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold small">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light"><i class="fa-solid fa-lock text-muted"></i></span>
+                    <input type="password" name="password" class="form-control rounded-end-3" placeholder="Create a strong password" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-lg w-100 rounded-pill fw-bold shadow mb-3">
+                <i class="fa-solid fa-paper-plane me-2"></i> Register & Get 10% OFF
+            </button>
+
+            <div class="text-center small text-muted">
+                Already have an AirNet account? <a href="/login" class="text-danger fw-bold">Login here</a>
+            </div>
+        </form>
+    </div>
+</div>

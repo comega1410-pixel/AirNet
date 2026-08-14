@@ -1,0 +1,117 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container my-4">
+    <!-- Admin Header -->
+    <div class="bg-dark text-white p-4 rounded-4 shadow-sm mb-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
+        <div>
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="badge bg-danger text-white rounded-pill px-3 py-1 fw-bold"><i class="fa-solid fa-shield-halved me-1"></i> ADMIN PORTAL</span>
+                <span class="text-secondary small">Logged in as: <strong>arpitxamrit77</strong></span>
+            </div>
+            <h2 class="fw-bold m-0 text-white">AirNet Super Control Center</h2>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="/admin/listings" class="btn btn-danger rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-hotel me-1"></i> Manage Properties
+            </a>
+            <a href="/listings/new" class="btn btn-outline-light rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-plus me-1"></i> Add Property
+            </a>
+            <a href="/logout" class="btn btn-outline-danger rounded-pill px-3 fw-bold">
+                <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Admin Metrics Grid -->
+    <div class="row row-cols-1 row-cols-md-4 g-3 mb-4">
+        <div class="col">
+            <div class="bg-white p-4 rounded-4 border shadow-sm h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted small font-bold">TOTAL PROPERTIES</span>
+                    <i class="fa-solid fa-building text-danger fs-4"></i>
+                </div>
+                <h2 class="fw-bold text-dark m-0"><%= totalListings || 43 %></h2>
+                <span class="text-success small fw-bold"><i class="fa-solid fa-arrow-trend-up"></i> Active across India</span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-white p-4 rounded-4 border shadow-sm h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted small font-bold">OYO HOTEL STAYS</span>
+                    <i class="fa-solid fa-hotel text-warning fs-4"></i>
+                </div>
+                <h2 class="fw-bold text-dark m-0"><%= oyoCount || 12 %></h2>
+                <span class="text-muted small">OYO Verified Partners</span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-white p-4 rounded-4 border shadow-sm h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted small font-bold">REGISTERED USERS</span>
+                    <i class="fa-solid fa-users text-primary fs-4"></i>
+                </div>
+                <h2 class="fw-bold text-dark m-0"><%= totalUsers || 158 %></h2>
+                <span class="text-muted small">Verified Travelers & Hosts</span>
+            </div>
+        </div>
+        <div class="col">
+            <div class="bg-white p-4 rounded-4 border shadow-sm h-100">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted small font-bold">TOTAL REVIEWS</span>
+                    <i class="fa-solid fa-star text-warning fs-4"></i>
+                </div>
+                <h2 class="fw-bold text-dark m-0">4.89 ★</h2>
+                <span class="text-muted small">Average Hospitality Score</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Admin Control Table -->
+    <div class="bg-white rounded-4 border shadow-sm p-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <h5 class="fw-bold m-0"><i class="fa-solid fa-list-check text-danger me-2"></i> Recent Platform Listings</h5>
+            <a href="/admin/listings" class="btn btn-outline-dark btn-sm rounded-pill px-3 fw-bold">View All Listings</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Property Type</th>
+                        <th>City / State</th>
+                        <th>Price (₹ INR)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (recentListings && recentListings.length > 0) { %>
+                        <% recentListings.forEach(function(listing) { %>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <img src="<%= listing.images && listing.images.length > 0 ? listing.images[0].url : (listing.image ? listing.image.url : '') %>" class="rounded-3 object-fit-cover" style="width: 45px; height: 45px;">
+                                        <span class="fw-bold text-dark small"><%= listing.title %></span>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-dark rounded-pill"><%= listing.propertyType %></span></td>
+                                <td><span class="small text-muted"><%= listing.city %>, <%= listing.state %></span></td>
+                                <td><strong class="text-danger">₹<%= listing.price ? listing.price.toLocaleString("en-IN") : '0' %></strong></td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-sm btn-outline-primary rounded-pill"><i class="fa-solid fa-pen"></i> Edit</a>
+                                        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete property?')">
+                                            <button class="btn btn-sm btn-outline-danger rounded-pill"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr><td colspan="5" class="text-center text-muted py-3">No listings found</td></tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

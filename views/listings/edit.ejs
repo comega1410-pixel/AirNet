@@ -1,0 +1,180 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container my-5" style="max-width: 860px;">
+    <div class="form-card">
+        <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+            <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                <i class="fa-solid fa-pen-to-square fs-4"></i>
+            </div>
+            <div>
+                <h2 class="fw-bold mb-0">Edit Listing Details</h2>
+                <p class="text-muted small mb-0">Update information for "<%= listing.title %>"</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate>
+            
+            <!-- SECTION 1: BASIC INFORMATION -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-circle-info text-danger me-2"></i> Basic Information</h5>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Listing Title</label>
+                    <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control rounded-3" required />
+                    <div class="invalid-feedback">Title is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea name="listing[description]" rows="4" class="form-control rounded-3" required><%= listing.description %></textarea>
+                    <div class="invalid-feedback">Description is required.</div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Property Service Type</label>
+                        <select name="listing[propertyType]" class="form-select rounded-3">
+                            <% ['OYO Hotel', 'Villa', 'Cabin', 'Haveli', 'Houseboat', 'Resort', 'Homestay', 'Cottage', 'Apartment', 'House'].forEach(pt => { %>
+                                <option value="<%= pt %>" <%= listing.propertyType === pt ? 'selected' : '' %>><%= pt %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Category Tab</label>
+                        <select name="listing[category]" class="form-select rounded-3">
+                            <% ['OYO Hotels', 'Trending', 'Villas', 'Hill Stations', 'Beachfront', 'Havelis', 'Houseboats', 'Luxury', 'Pilgrimage', 'Camping', 'Cities'].forEach(cat => { %>
+                                <option value="<%= cat %>" <%= listing.category === cat ? 'selected' : '' %>><%= cat %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 2: IMAGES -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-camera text-danger me-2"></i> Property Images</h5>
+                
+                <% 
+                    let currentImg = (listing.images && listing.images.length > 0 && listing.images[0].url) ? listing.images[0].url : (listing.image ? listing.image.url : '');
+                %>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Primary Image Preview & URL</label>
+                    <% if (currentImg) { %>
+                        <div class="mb-2" style="max-width: 240px; height: 140px; overflow:hidden; border-radius:12px;">
+                            <img src="<%= currentImg %>" alt="Current Image" class="w-100 h-100 object-fit-cover">
+                        </div>
+                    <% } %>
+                    <input type="url" name="listing[image][url]" value="<%= currentImg %>" class="form-control rounded-3" required />
+                    <div class="invalid-feedback">Valid Image URL is required.</div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 3: PRICING & SPECS -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-indian-rupee-sign text-danger me-2"></i> Pricing in INR & Capacity</h5>
+                
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Price Per Night (₹ INR)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light fw-bold">₹</span>
+                            <input type="number" name="listing[price]" value="<%= listing.price %>" min="0" class="form-control rounded-end-3" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Max Guests</label>
+                        <input type="number" name="listing[guests]" min="1" value="<%= listing.guests || 2 %>" class="form-control rounded-3" required />
+                    </div>
+                </div>
+
+                <div class="row row-cols-3 g-3">
+                    <div class="col">
+                        <label class="form-label fw-semibold">Bedrooms</label>
+                        <input type="number" name="listing[bedrooms]" min="0" value="<%= listing.bedrooms || 1 %>" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-semibold">Beds</label>
+                        <input type="number" name="listing[beds]" min="0" value="<%= listing.beds || 1 %>" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-semibold">Bathrooms</label>
+                        <input type="number" name="listing[bathrooms]" min="0" value="<%= listing.bathrooms || 1 %>" class="form-control rounded-3" required />
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 4: LOCATION -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-map-location-dot text-danger me-2"></i> Location</h5>
+                
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Location / Area</label>
+                        <input type="text" name="listing[location]" value="<%= listing.location %>" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">City</label>
+                        <input type="text" name="listing[city]" value="<%= listing.city || listing.location %>" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">State</label>
+                        <input type="text" name="listing[state]" value="<%= listing.state || 'Goa' %>" class="form-control rounded-3" required />
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Latitude</label>
+                        <input type="number" step="any" name="listing[geometry][coordinates][1]" value="<%= (listing.geometry && listing.geometry.coordinates) ? listing.geometry.coordinates[1] : 15.4909 %>" class="form-control rounded-3" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Longitude</label>
+                        <input type="number" step="any" name="listing[geometry][coordinates][0]" value="<%= (listing.geometry && listing.geometry.coordinates) ? listing.geometry.coordinates[0] : 73.8278 %>" class="form-control rounded-3" />
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 5: INDIAN ESSENTIAL FLAGS -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-list-check text-danger me-2"></i> Badges & Settings</h5>
+                
+                <div class="row row-cols-3 g-3 mb-3">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[coupleFriendly]" value="true" id="editCouple" <%= listing.coupleFriendly ? 'checked' : '' %>>
+                            <label class="form-check-label fw-bold" for="editCouple">Couple Friendly</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[payAtHotel]" value="true" id="editPay" <%= listing.payAtHotel ? 'checked' : '' %>>
+                            <label class="form-check-label fw-bold" for="editPay">Pay at Check-In</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[freeBreakfast]" value="true" id="editBreakfast" <%= listing.freeBreakfast ? 'checked' : '' %>>
+                            <label class="form-check-label fw-bold" for="editBreakfast">Free Breakfast</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <div class="d-flex gap-3 mt-4">
+                <button type="submit" class="btn btn-dark btn-lg flex-grow-1 rounded-pill fw-bold shadow-sm">
+                    <i class="fa-solid fa-check me-2"></i> Update Listing
+                </button>
+                <a href="/listings/<%= listing._id %>" class="btn btn-outline-secondary btn-lg rounded-pill px-4">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

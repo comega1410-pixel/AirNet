@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Listing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section h2 {
+            margin-bottom: 18px;
+            font-size: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #ff385c;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .image-row,
+        .amenity-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .image-row input,
+        .amenity-row input {
+            flex: 1;
+        }
+
+        .small-btn {
+            border: none;
+            padding: 10px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            background: #eee;
+        }
+
+        .add-btn {
+            background: #222;
+            color: white;
+        }
+
+        .remove-btn {
+            background: #ff385c;
+            color: white;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #ff385c;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #e31c5f;
+        }
+
+        @media (max-width: 650px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🏠 Create New Listing</h1>
+
+        <form action="/listings" method="POST">
+
+            <!-- BASIC INFORMATION -->
+            <div class="section">
+
+                <h2>Basic Information</h2>
+
+                <div class="form-group">
+                    <label for="title">Listing Title</label>
+                    <input type="text" id="title" name="title" placeholder="e.g. Luxury Beach Villa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Describe your property..."
+                        required></textarea>
+                </div>
+
+            </div>
+
+
+            <!-- IMAGES -->
+            <div class="section">
+
+                <h2>📸 Property Images</h2>
+
+                <div id="imageContainer">
+
+                    <div class="image-row">
+                        <input type="url" name="images[0][url]" placeholder="Image URL" required>
+
+                        <input type="text" name="images[0][filename]" placeholder="Filename">
+                    </div>
+
+                </div>
+
+                <button type="button" class="small-btn add-btn" onclick="addImage()">
+                    + Add Image
+                </button>
+
+            </div>
+
+
+            <!-- PRICING -->
+            <div class="section">
+
+                <h2>💰 Pricing</h2>
+
+                <div class="grid">
+
+                    <div class="form-group">
+                        <label for="price">Price per Night</label>
+
+                        <input type="number" id="price" name="price" min="0" placeholder="5000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currency">Currency</label>
+
+                        <select id="currency" name="currency">
+                            <option value="INR">INR - ₹</option>
+                            <option value="USD">USD - $</option>
+                            <option value="EUR">EUR - €</option>
+                            <option value="GBP">GBP - £</option>
+                            <option value="AED">AED - د.إ</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+            <div class="section">
+
+                <h2>📍 Location</h2>
+
+                <div class="grid">
+
+                    <div class="form-group">
+                        <label for="location">City / Location</label>
+
+                        <input type="text" id="location" name="location" placeholder="Goa" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">Country</label>
+
+                        <input type="text" id="country" name="country" placeholder="India" required>
+                    </div>
+
+                </div>
+
+                <div class="grid">
+
+                    <div class="form-group">
+                        <label for="latitude">Latitude</label>
+
+                        <input type="number" step="any" id="latitude" name="geometry[coordinates][1]"
+                            placeholder="15.4909">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="longitude">Longitude</label>
+
+                        <input type="number" step="any" id="longitude" name="geometry[coordinates][0]"
+                            placeholder="73.8278">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROPERTY -->
+            <div class="section">
+
+                <h2>🏡 Property Details</h2>
+
+                <div class="grid">
+
+                    <div class="form-group">
+                        <label>Property Type</label>
+
+                        <select name="propertyType">
+
+                            <option value="House">House</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Cabin">Cabin</option>
+                            <option value="Cottage">Cottage</option>
+                            <option value="Hostel">Hostel</option>
+                            <option value="Resort">Resort</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Category</label>
+
+                        <select name="category">
+
+                            <option value="Trending">Trending</option>
+                            <option value="Rooms">Rooms</option>
+                            <option value="Beach">Beach</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="Cities">Cities</option>
+                            <option value="Countryside">Countryside</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Pools">Pools</option>
+                            <option value="Camping">Camping</option>
+                            <option value="Castles">Castles</option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="grid">
+
+                    <div class="form-group">
+                        <label>Guests</label>
+
+                        <input type="number" name="guests" min="1" value="1">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Bedrooms</label>
+
+                        <input type="number" name="bedrooms" min="0" value="0">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Beds</label>
+
+                        <input type="number" name="beds" min="0" value="0">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Bathrooms</label>
+
+                        <input type="number" name="bathrooms" min="0" value="0">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- AMENITIES -->
+            <div class="section">
+
+                <h2>✨ Amenities</h2>
+
+                <div id="amenityContainer">
+
+                    <div class="amenity-row">
+                        <input type="text" name="amenities[]" placeholder="e.g. WiFi">
+                    </div>
+
+                </div>
+
+                <button type="button" class="small-btn add-btn" onclick="addAmenity()">
+                    + Add Amenity
+                </button>
+
+            </div>
+
+
+            <!-- BOOKING -->
+            <div class="section">
+
+                <h2>📅 Booking</h2>
+
+                <div class="checkbox">
+
+                    <input type="checkbox" id="instantBooking" name="instantBooking" value="true">
+
+                    <label for="instantBooking">
+                        Allow Instant Booking
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+            <div class="section">
+
+                <h2>⚙️ Listing Status</h2>
+
+                <select name="status">
+
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="pending">Pending</option>
+                    <option value="blocked">Blocked</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button type="submit" class="submit-btn">
+                Create Listing
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <script>
+
+        // =========================
+        // ADD IMAGE
+        // =========================
+
+        let imageCount = 1;
+
+        function addImage() {
+
+            const container =
+                document.getElementById("imageContainer");
+
+            const div =
+                document.createElement("div");
+
+            div.className = "image-row";
+
+            div.innerHTML = `
+            <input
+                type="url"
+                name="images[${imageCount}][url]"
+                placeholder="Image URL"
+            >
+
+            <input
+                type="text"
+                name="images[${imageCount}][filename]"
+                placeholder="Filename"
+            >
+
+            <button
+                type="button"
+                class="small-btn remove-btn"
+                onclick="this.parentElement.remove()"
+            >
+                Remove
+            </button>
+        `;
+
+            container.appendChild(div);
+
+            imageCount++;
+        }
+
+
+        // =========================
+        // ADD AMENITY
+        // =========================
+
+        function addAmenity() {
+
+            const container =
+                document.getElementById("amenityContainer");
+
+            const div =
+                document.createElement("div");
+
+            div.className = "amenity-row";
+
+            div.innerHTML = `
+            <input
+                type="text"
+                name="amenities[]"
+                placeholder="e.g. Swimming Pool"
+            >
+
+            <button
+                type="button"
+                class="small-btn remove-btn"
+                onclick="this.parentElement.remove()"
+            >
+                Remove
+            </button>
+        `;
+
+            container.appendChild(div);
+        }
+
+    </script>
+
+</body>
+
+</html>

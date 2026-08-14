@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-airnet sticky-top">
+    <div class="container-fluid px-md-4">
+        <!-- Logo & Branding (Clicking logo redirects to home page /listings) -->
+        <a class="brand-logo me-2 me-lg-3" href="/listings" title="AirNet Home">
+            <i class="fa-solid fa-hotel"></i>
+            <span>AirNet</span>
+            <span class="brand-badge-india">INDIA</span>
+        </a>
+
+        <!-- Senior Developer Unified Search Pill -->
+        <form class="d-none d-md-flex align-items-center my-2 my-lg-0 mx-auto" action="/listings" method="GET">
+            <div class="nav-search-bar">
+                <!-- Search Input -->
+                <i class="fa-solid fa-magnifying-glass text-danger ms-1 me-2 small"></i>
+                <input type="text" name="search" class="border-0 bg-transparent ps-0 pe-1 text-dark fw-bold small" 
+                       placeholder="Surat, Goa, OYO, Villa..." value="<%= typeof currentSearch !== 'undefined' ? currentSearch : '' %>" style="outline:none; width: 170px;">
+                
+                <div class="search-divider"></div>
+
+                <!-- State Selector -->
+                <i class="fa-solid fa-location-dot text-danger me-1 small"></i>
+                <select name="state" id="navStateSelect" class="border-0 bg-transparent text-dark fw-bold small" style="outline:none; cursor:pointer; width: 110px;">
+                    <option value="">Any State</option>
+                    <option value="Gujarat" <%= typeof currentState !== 'undefined' && currentState === 'Gujarat' ? 'selected' : '' %>>Gujarat</option>
+                    <option value="Maharashtra" <%= typeof currentState !== 'undefined' && currentState === 'Maharashtra' ? 'selected' : '' %>>Maharashtra</option>
+                    <option value="Delhi NCR" <%= typeof currentState !== 'undefined' && currentState === 'Delhi NCR' ? 'selected' : '' %>>Delhi NCR</option>
+                    <option value="Rajasthan" <%= typeof currentState !== 'undefined' && currentState === 'Rajasthan' ? 'selected' : '' %>>Rajasthan</option>
+                    <option value="Goa" <%= typeof currentState !== 'undefined' && currentState === 'Goa' ? 'selected' : '' %>>Goa</option>
+                    <option value="Bihar" <%= typeof currentState !== 'undefined' && currentState === 'Bihar' ? 'selected' : '' %>>Bihar</option>
+                    <option value="Karnataka" <%= typeof currentState !== 'undefined' && currentState === 'Karnataka' ? 'selected' : '' %>>Karnataka</option>
+                    <option value="Kerala" <%= typeof currentState !== 'undefined' && currentState === 'Kerala' ? 'selected' : '' %>>Kerala</option>
+                    <option value="Himachal Pradesh" <%= typeof currentState !== 'undefined' && currentState === 'Himachal Pradesh' ? 'selected' : '' %>>Himachal</option>
+                    <option value="Uttarakhand" <%= typeof currentState !== 'undefined' && currentState === 'Uttarakhand' ? 'selected' : '' %>>Uttarakhand</option>
+                    <option value="Uttar Pradesh" <%= typeof currentState !== 'undefined' && currentState === 'Uttar Pradesh' ? 'selected' : '' %>>UP</option>
+                </select>
+
+                <div class="search-divider"></div>
+
+                <!-- City Selector -->
+                <select name="city" id="navCitySelect" class="border-0 bg-transparent text-dark fw-bold small" style="outline:none; cursor:pointer; width: 100px;">
+                    <option value="">Any City</option>
+                    <option value="Surat" <%= typeof currentCity !== 'undefined' && currentCity === 'Surat' ? 'selected' : '' %>>Surat</option>
+                    <option value="Ahmedabad" <%= typeof currentCity !== 'undefined' && currentCity === 'Ahmedabad' ? 'selected' : '' %>>Ahmedabad</option>
+                    <option value="Vadodara" <%= typeof currentCity !== 'undefined' && currentCity === 'Vadodara' ? 'selected' : '' %>>Vadodara</option>
+                    <option value="Mumbai" <%= typeof currentCity !== 'undefined' && currentCity === 'Mumbai' ? 'selected' : '' %>>Mumbai</option>
+                    <option value="Delhi" <%= typeof currentCity !== 'undefined' && currentCity === 'Delhi' ? 'selected' : '' %>>Delhi</option>
+                </select>
+
+                <button type="submit" class="search-btn-circle ms-2" title="Search stays">
+                    <i class="fa-solid fa-magnifying-glass fs-6"></i>
+                </button>
+            </div>
+        </form>
+
+        <!-- Right Side Nav -->
+        <div class="d-flex align-items-center gap-2">
+            <!-- Currency Switcher Globe Button -->
+            <button type="button" class="btn btn-light border rounded-pill px-3 py-1 fw-bold small d-flex align-items-center gap-1 shadow-sm" data-bs-toggle="modal" data-bs-target="#currencyModal" title="Change currency">
+                <i class="fa-solid fa-globe text-secondary"></i>
+                <span class="active-currency-label">INR (₹)</span>
+            </button>
+
+            <!-- Admin Badge Button if Admin -->
+            <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+                <a href="/admin/dashboard" class="btn btn-dark rounded-pill btn-sm fw-bold px-3 shadow-sm">
+                    <i class="fa-solid fa-shield-halved text-warning me-1"></i> Admin Portal
+                </a>
+            <% } else { %>
+                <a href="/listings/new" class="btn btn-danger rounded-pill btn-sm fw-bold px-3 d-none d-sm-inline-block shadow-sm">
+                    <i class="fa-solid fa-plus me-1"></i> List Property
+                </a>
+            <% } %>
+
+            <!-- User Menu Dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-light border rounded-pill px-3 py-1 d-flex align-items-center gap-2 shadow-sm" 
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-bars fs-6 text-secondary"></i>
+                    <div class="<%= (typeof isAdmin !== 'undefined' && isAdmin) ? 'bg-dark text-warning' : 'bg-danger text-white' %> rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-4 mt-2 p-2" style="min-width: 250px;">
+                    <% if (typeof currentUser !== 'undefined' && currentUser) { %>
+                        <li class="px-3 py-2 bg-light rounded-3 mb-2">
+                            <div class="fw-bold text-dark small"><%= currentUser.username %></div>
+                            <div class="text-muted" style="font-size:0.75rem;"><%= currentUser.email %></div>
+                        </li>
+                        <% if (currentUser.role === 'admin') { %>
+                            <li><a class="dropdown-item fw-bold py-2 rounded-3 text-warning bg-dark mb-1" href="/admin/dashboard"><i class="fa-solid fa-shield-halved me-2"></i> Admin Control Center</a></li>
+                        <% } %>
+                        <li><a class="dropdown-item fw-bold py-2 rounded-3 text-danger" href="/listings"><i class="fa-solid fa-compass me-2"></i> Explore All India Stays</a></li>
+                        <li><a class="dropdown-item py-2 rounded-3 fw-semibold" href="/listings/new"><i class="fa-solid fa-plus-circle me-2 text-success"></i> Host Property on AirNet</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 rounded-3 text-danger fw-bold" href="/logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                    <% } else { %>
+                        <li><a class="dropdown-item fw-bold py-2 rounded-3 text-danger" href="/login"><i class="fa-solid fa-right-to-bracket me-2"></i> Login</a></li>
+                        <li><a class="dropdown-item fw-bold py-2 rounded-3 text-primary" href="/signup"><i class="fa-solid fa-user-plus me-2"></i> Register (Get 10% OFF)</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 rounded-3 fw-semibold" href="/listings?state=Gujarat"><i class="fa-solid fa-location-dot me-2 text-warning"></i> Gujarat Stays (Surat, AHD...)</a></li>
+                        <li><a class="dropdown-item py-2 rounded-3 fw-semibold" href="/listings?propertyType=OYO+Hotel"><i class="fa-solid fa-hotel me-2 text-danger"></i> OYO Welcomed Hotels</a></li>
+                        <li><button type="button" class="dropdown-item py-2 rounded-3 text-muted" data-bs-toggle="modal" data-bs-target="#currencyModal"><i class="fa-solid fa-globe me-2"></i> Choose Currency</button></li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

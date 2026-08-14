@@ -1,0 +1,139 @@
+<!-- Senior Developer Search & Filter Modal -->
+<div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-4 border-0 shadow-lg">
+            <div class="modal-header border-bottom px-4 py-3">
+                <h5 class="modal-title fw-bold text-dark fs-5" id="filtersModalLabel">
+                    <i class="fa-solid fa-sliders text-danger me-2"></i> Filters & Shortlist
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/listings" method="GET">
+                <div class="modal-body p-4">
+
+                    <!-- 1. Destination & Location -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-location-dot text-danger me-2"></i> Destination & Location</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Select State</label>
+                                <select name="state" id="modalStateSelect" class="form-select rounded-3 fw-bold">
+                                    <option value="">All States in India</option>
+                                    <option value="Gujarat"          <%= (typeof currentState !== 'undefined' && currentState === 'Gujarat')          ? 'selected' : '' %>>Gujarat</option>
+                                    <option value="Maharashtra"      <%= (typeof currentState !== 'undefined' && currentState === 'Maharashtra')      ? 'selected' : '' %>>Maharashtra</option>
+                                    <option value="Delhi NCR"        <%= (typeof currentState !== 'undefined' && currentState === 'Delhi NCR')        ? 'selected' : '' %>>Delhi NCR</option>
+                                    <option value="Rajasthan"        <%= (typeof currentState !== 'undefined' && currentState === 'Rajasthan')        ? 'selected' : '' %>>Rajasthan</option>
+                                    <option value="Goa"              <%= (typeof currentState !== 'undefined' && currentState === 'Goa')              ? 'selected' : '' %>>Goa</option>
+                                    <option value="Bihar"            <%= (typeof currentState !== 'undefined' && currentState === 'Bihar')            ? 'selected' : '' %>>Bihar</option>
+                                    <option value="Karnataka"        <%= (typeof currentState !== 'undefined' && currentState === 'Karnataka')        ? 'selected' : '' %>>Karnataka</option>
+                                    <option value="Kerala"           <%= (typeof currentState !== 'undefined' && currentState === 'Kerala')           ? 'selected' : '' %>>Kerala</option>
+                                    <option value="Himachal Pradesh" <%= (typeof currentState !== 'undefined' && currentState === 'Himachal Pradesh') ? 'selected' : '' %>>Himachal Pradesh</option>
+                                    <option value="Uttarakhand"      <%= (typeof currentState !== 'undefined' && currentState === 'Uttarakhand')      ? 'selected' : '' %>>Uttarakhand</option>
+                                    <option value="Uttar Pradesh"    <%= (typeof currentState !== 'undefined' && currentState === 'Uttar Pradesh')    ? 'selected' : '' %>>Uttar Pradesh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold text-muted">Select City</label>
+                                <select name="city" id="modalCitySelect" class="form-select rounded-3 fw-bold">
+                                    <option value="">All Cities</option>
+                                    <optgroup label="Gujarat Cities">
+                                        <option value="Surat"       <%= (typeof currentCity !== 'undefined' && currentCity === 'Surat')       ? 'selected' : '' %>>Surat</option>
+                                        <option value="Ahmedabad"   <%= (typeof currentCity !== 'undefined' && currentCity === 'Ahmedabad')   ? 'selected' : '' %>>Ahmedabad</option>
+                                        <option value="Vadodara"    <%= (typeof currentCity !== 'undefined' && currentCity === 'Vadodara')    ? 'selected' : '' %>>Vadodara</option>
+                                        <option value="Gandhinagar" <%= (typeof currentCity !== 'undefined' && currentCity === 'Gandhinagar') ? 'selected' : '' %>>Gandhinagar</option>
+                                        <option value="Jamnagar"    <%= (typeof currentCity !== 'undefined' && currentCity === 'Jamnagar')    ? 'selected' : '' %>>Jamnagar</option>
+                                        <option value="Anand"       <%= (typeof currentCity !== 'undefined' && currentCity === 'Anand')       ? 'selected' : '' %>>Anand</option>
+                                    </optgroup>
+                                    <optgroup label="Major Indian Hubs">
+                                        <option value="Mumbai"      <%= (typeof currentCity !== 'undefined' && currentCity === 'Mumbai')      ? 'selected' : '' %>>Mumbai</option>
+                                        <option value="Delhi"       <%= (typeof currentCity !== 'undefined' && currentCity === 'Delhi')       ? 'selected' : '' %>>Delhi</option>
+                                        <option value="Patna"       <%= (typeof currentCity !== 'undefined' && currentCity === 'Patna')       ? 'selected' : '' %>>Patna</option>
+                                        <option value="Bengaluru"   <%= (typeof currentCity !== 'undefined' && currentCity === 'Bengaluru')   ? 'selected' : '' %>>Bengaluru</option>
+                                        <option value="Jaipur"      <%= (typeof currentCity !== 'undefined' && currentCity === 'Jaipur')      ? 'selected' : '' %>>Jaipur</option>
+                                        <option value="Udaipur"     <%= (typeof currentCity !== 'undefined' && currentCity === 'Udaipur')     ? 'selected' : '' %>>Udaipur</option>
+                                        <option value="Goa"         <%= (typeof currentCity !== 'undefined' && currentCity === 'Goa')         ? 'selected' : '' %>>Goa</option>
+                                        <option value="Manali"      <%= (typeof currentCity !== 'undefined' && currentCity === 'Manali')      ? 'selected' : '' %>>Manali</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <!-- 2. Stay Type & Category -->
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-hotel text-danger me-2"></i> Property Service Type</h6>
+                        <div class="row g-2">
+                            <div class="col-6 col-sm-4">
+                                <input type="radio" class="btn-check" name="propertyType" id="ptAll" value=""
+                                    <%= (typeof currentPropertyType === 'undefined' || !currentPropertyType) ? 'checked' : '' %>>
+                                <label class="btn btn-outline-secondary w-100 rounded-3 text-start small fw-bold py-2" for="ptAll">All Services</label>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                                <input type="radio" class="btn-check" name="propertyType" id="ptOyo" value="OYO Hotel"
+                                    <%= (typeof currentPropertyType !== 'undefined' && currentPropertyType === 'OYO Hotel') ? 'checked' : '' %>>
+                                <label class="btn btn-outline-danger w-100 rounded-3 text-start small fw-bold py-2" for="ptOyo">
+                                    <i class="fa-solid fa-hotel me-1"></i> OYO Hotels
+                                </label>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                                <input type="radio" class="btn-check" name="propertyType" id="ptVilla" value="Villa"
+                                    <%= (typeof currentPropertyType !== 'undefined' && currentPropertyType === 'Villa') ? 'checked' : '' %>>
+                                <label class="btn btn-outline-dark w-100 rounded-3 text-start small fw-bold py-2" for="ptVilla">
+                                    <i class="fa-solid fa-house-chimney me-1"></i> Villas
+                                </label>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                                <input type="radio" class="btn-check" name="propertyType" id="ptCabin" value="Cabin"
+                                    <%= (typeof currentPropertyType !== 'undefined' && currentPropertyType === 'Cabin') ? 'checked' : '' %>>
+                                <label class="btn btn-outline-dark w-100 rounded-3 text-start small fw-bold py-2" for="ptCabin">
+                                    <i class="fa-solid fa-mountain me-1"></i> Cabins
+                                </label>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                                <input type="radio" class="btn-check" name="propertyType" id="ptHaveli" value="Haveli"
+                                    <%= (typeof currentPropertyType !== 'undefined' && currentPropertyType === 'Haveli') ? 'checked' : '' %>>
+                                <label class="btn btn-outline-dark w-100 rounded-3 text-start small fw-bold py-2" for="ptHaveli">
+                                    <i class="fa-solid fa-landmark me-1"></i> Havelis
+                                </label>
+                            </div>
+                            <div class="col-6 col-sm-4">
+                                <input type="radio" class="btn-check" name="propertyType" id="ptHouseboat" value="Houseboat"
+                                    <%= (typeof currentPropertyType !== 'undefined' && currentPropertyType === 'Houseboat') ? 'checked' : '' %>>
+                                <label class="btn btn-outline-dark w-100 rounded-3 text-start small fw-bold py-2" for="ptHouseboat">
+                                    <i class="fa-solid fa-ship me-1"></i> Houseboats
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <!-- 3. Indian Guest Preferences -->
+                    <div class="mb-3">
+                        <h6 class="fw-bold text-dark mb-3"><i class="fa-solid fa-heart text-danger me-2"></i> Indian Traveler Essentials</h6>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-check form-switch p-3 border rounded-3 bg-light">
+                                    <input class="form-check-input ms-0 me-2" type="checkbox" name="coupleFriendly" value="true" id="filterCouple">
+                                    <label class="form-check-label fw-bold small text-dark" for="filterCouple">Show Couple Friendly Stays Only</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-switch p-3 border rounded-3 bg-light">
+                                    <input class="form-check-input ms-0 me-2" type="checkbox" name="payAtHotel" value="true" id="filterPayAtHotel">
+                                    <label class="form-check-label fw-bold small text-dark" for="filterPayAtHotel">Show Pay at Check-In Stays</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top px-4 py-3 d-flex justify-content-between">
+                    <a href="/listings" class="btn btn-link text-muted fw-bold text-decoration-none">Clear all</a>
+                    <button type="submit" class="btn btn-danger rounded-pill px-4 fw-bold">Show Stays</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

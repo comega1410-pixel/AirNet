@@ -1,0 +1,14 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container my-5 text-center py-5">
+    <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 120px; height: 120px;">
+        <h1 class="text-danger fw-bold m-0" style="font-size: 3.5rem;">404</h1>
+    </div>
+    <h2 class="fw-bold mb-2">Page Not Found</h2>
+    <p class="text-muted mb-4" style="max-width: 480px; margin: 0 auto;">
+        <%= typeof message !== 'undefined' ? message : "We couldn't find the page or stay you were looking for on AirNet India." %>
+    </p>
+    <a href="/listings" class="btn btn-danger rounded-pill px-4 py-2 fw-bold shadow">
+        <i class="fa-solid fa-house me-2"></i> Return to AirNet Home
+    </a>
+</div>

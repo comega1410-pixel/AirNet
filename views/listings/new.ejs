@@ -1,0 +1,241 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container my-5" style="max-width: 860px;">
+    <div class="form-card">
+        <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
+            <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 54px; height: 54px;">
+                <i class="fa-solid fa-hotel fs-3"></i>
+            </div>
+            <div>
+                <h2 class="fw-bold mb-0">List Your Property on AirNet India</h2>
+                <p class="text-muted small mb-0">Reach millions of travelers across India seeking OYO Rooms, Luxury Villas, Cabins, and Heritage Havelis.</p>
+            </div>
+        </div>
+
+        <form method="POST" action="/listings" class="needs-validation" novalidate>
+            
+            <!-- SECTION 1: BASIC INFORMATION -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-circle-info text-danger me-2"></i> 1. Property Details</h5>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Listing Title</label>
+                    <input type="text" name="listing[title]" placeholder="e.g. OYO Flagship Sunset Villa & Spa" class="form-control rounded-3" required />
+                    <div class="invalid-feedback">Please provide a descriptive listing title.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea name="listing[description]" rows="4" placeholder="Describe room highlights, distance from beach/sightseeing, food options, and amenities..." class="form-control rounded-3" required></textarea>
+                    <div class="invalid-feedback">Please enter a property description.</div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Property Service Type</label>
+                        <select name="listing[propertyType]" class="form-select rounded-3">
+                            <option value="OYO Hotel">OYO Hotel / Budget Stay</option>
+                            <option value="Villa" selected>Luxury Villa</option>
+                            <option value="Cabin">Mountain Cabin</option>
+                            <option value="Haveli">Heritage Haveli</option>
+                            <option value="Houseboat">Backwater Houseboat</option>
+                            <option value="Resort">Beach / Hill Resort</option>
+                            <option value="Homestay">Heritage Homestay</option>
+                            <option value="Cottage">Garden Cottage</option>
+                            <option value="Apartment">Modern Apartment</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Category Tab</label>
+                        <select name="listing[category]" class="form-select rounded-3">
+                            <option value="OYO Hotels">OYO Hotels</option>
+                            <option value="Trending" selected>Trending</option>
+                            <option value="Villas">Villas</option>
+                            <option value="Hill Stations">Hill Stations</option>
+                            <option value="Beachfront">Beachfront</option>
+                            <option value="Havelis">Havelis</option>
+                            <option value="Houseboats">Houseboats</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Pilgrimage">Pilgrimage</option>
+                            <option value="Camping">Camping</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 2: IMAGES -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-camera text-danger me-2"></i> 2. High-Resolution Photos</h5>
+                
+                <div id="imagesContainer">
+                    <div class="image-input-group mb-3">
+                        <label class="form-label fw-semibold">Primary Showcase Image URL</label>
+                        <input type="url" name="listing[images][0][url]" placeholder="https://images.unsplash.com/photo-..." class="form-control rounded-3" required />
+                        <div class="invalid-feedback">Please enter a valid image URL.</div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-outline-dark btn-sm rounded-pill font-semibold" onclick="addExtraImageInput()">
+                    <i class="fa-solid fa-plus me-1"></i> Add Secondary Image
+                </button>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 3: PRICING & SPECS (INR) -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-indian-rupee-sign text-danger me-2"></i> 3. Pricing in INR & Capacity</h5>
+                
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Price Per Night (₹ INR)</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light fw-bold">₹</span>
+                            <input type="number" name="listing[price]" min="1" placeholder="2499" class="form-control rounded-end-3" required />
+                            <div class="invalid-feedback">Please enter a price per night in INR.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Max Guest Capacity</label>
+                        <input type="number" name="listing[guests]" min="1" value="2" class="form-control rounded-3" required />
+                    </div>
+                </div>
+
+                <div class="row row-cols-3 g-3">
+                    <div class="col">
+                        <label class="form-label fw-semibold">Bedrooms</label>
+                        <input type="number" name="listing[bedrooms]" min="0" value="1" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-semibold">Beds</label>
+                        <input type="number" name="listing[beds]" min="0" value="1" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col">
+                        <label class="form-label fw-semibold">Bathrooms</label>
+                        <input type="number" name="listing[bathrooms]" min="0" value="1" class="form-control rounded-3" required />
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 4: INDIAN LOCATION -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-map-location-dot text-danger me-2"></i> 4. Location in India</h5>
+                
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Specific Location / Area</label>
+                        <input type="text" name="listing[location]" placeholder="e.g. Baga Beach, Calangute" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">City</label>
+                        <input type="text" name="listing[city]" placeholder="e.g. Goa, Jaipur, Manali" class="form-control rounded-3" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">State</label>
+                        <input type="text" name="listing[state]" placeholder="e.g. Goa, Rajasthan, HP" class="form-control rounded-3" required />
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Latitude (for Leaflet Map)</label>
+                        <input type="number" step="any" name="listing[geometry][coordinates][1]" value="15.4909" class="form-control rounded-3" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">Longitude (for Leaflet Map)</label>
+                        <input type="number" step="any" name="listing[geometry][coordinates][0]" value="73.8278" class="form-control rounded-3" />
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- SECTION 5: INDIAN ESSENTIAL AMENITIES & BADGES -->
+            <div class="mb-4">
+                <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-list-check text-danger me-2"></i> 5. Hospitality Badges & Amenities</h5>
+                
+                <div class="row row-cols-2 row-cols-md-3 g-3 mb-4">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[coupleFriendly]" value="true" id="coupleFriendly" checked>
+                            <label class="form-check-label fw-bold" for="coupleFriendly"><i class="fa-solid fa-heart text-danger me-1"></i> Couple Friendly</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[payAtHotel]" value="true" id="payAtHotel">
+                            <label class="form-check-label fw-bold" for="payAtHotel"><i class="fa-solid fa-wallet text-success me-1"></i> Pay at Check-In</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[freeBreakfast]" value="true" id="freeBreakfast" checked>
+                            <label class="form-check-label fw-bold" for="freeBreakfast"><i class="fa-solid fa-mug-hot me-1"></i> Free Breakfast</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[amenities][]" value="High-speed WiFi" id="wifi" checked>
+                            <label class="form-check-label" for="wifi"><i class="fa-solid fa-wifi me-1"></i> High-Speed WiFi</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[amenities][]" value="Air Conditioning" id="ac" checked>
+                            <label class="form-check-label" for="ac"><i class="fa-solid fa-snowflake me-1"></i> Air Conditioning</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[amenities][]" value="24/7 Power Backup" id="power" checked>
+                            <label class="form-check-label" for="power"><i class="fa-solid fa-bolt me-1"></i> 24/7 Power Backup</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[amenities][]" value="Swimming Pool" id="pool">
+                            <label class="form-check-label" for="pool"><i class="fa-solid fa-person-swimming me-1"></i> Swimming Pool</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="listing[amenities][]" value="Free Parking" id="parking" checked>
+                            <label class="form-check-label" for="parking"><i class="fa-solid fa-car me-1"></i> Free Parking</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check form-switch p-3 border rounded-3 bg-light">
+                    <input class="form-check-input ms-0 me-2" type="checkbox" name="listing[instantBooking]" value="true" id="instantBookingSwitch" checked>
+                    <label class="form-check-label fw-bold" for="instantBookingSwitch">Allow Instant Booking without manual host approval</label>
+                </div>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" class="btn btn-danger btn-lg w-100 rounded-pill font-bold shadow py-3 mt-3">
+                <i class="fa-solid fa-paper-plane me-2"></i> Publish AirNet Stay
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    let imgCount = 1;
+    function addExtraImageInput() {
+        const container = document.getElementById("imagesContainer");
+        const div = document.createElement("div");
+        div.className = "input-group mb-3";
+        div.innerHTML = `
+            <input type="url" name="listing[images][${imgCount}][url]" placeholder="Secondary image URL..." class="form-control rounded-start-3" required />
+            <button type="button" class="btn btn-outline-danger" onclick="this.parentElement.remove()">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        `;
+        container.appendChild(div);
+        imgCount++;
+    }
+</script>

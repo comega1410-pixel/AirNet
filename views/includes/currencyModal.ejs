@@ -1,0 +1,178 @@
+<!-- Airbnb-Style Choose a Currency Modal -->
+<div class="modal fade" id="currencyModal" tabindex="-1" aria-labelledby="currencyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content rounded-4 border-0 shadow-lg">
+            <div class="modal-header border-bottom px-4 py-3">
+                <h5 class="modal-title fw-bold text-dark fs-4" id="currencyModalLabel">Choose a currency</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <p class="text-muted small mb-4">Select your preferred currency for prices across AirNet stays.</p>
+
+                <!-- Currencies Grid -->
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3" id="currencyGridContainer">
+                    
+                    <!-- Indian Rupee (Default) -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card active w-100 text-start p-3 rounded-4 border btn" data-code="INR" data-symbol="₹" data-rate="1">
+                            <div class="fw-bold text-dark small">Indian rupee</div>
+                            <div class="text-muted small">INR – ₹</div>
+                        </button>
+                    </div>
+
+                    <!-- United States Dollar -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="USD" data-symbol="$" data-rate="0.012">
+                            <div class="fw-bold text-dark small">United States dollar</div>
+                            <div class="text-muted small">USD – $</div>
+                        </button>
+                    </div>
+
+                    <!-- Euro -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="EUR" data-symbol="€" data-rate="0.011">
+                            <div class="fw-bold text-dark small">Euro</div>
+                            <div class="text-muted small">EUR – €</div>
+                        </button>
+                    </div>
+
+                    <!-- Pound Sterling -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="GBP" data-symbol="£" data-rate="0.0094">
+                            <div class="fw-bold text-dark small">Pound sterling</div>
+                            <div class="text-muted small">GBP – £</div>
+                        </button>
+                    </div>
+
+                    <!-- Australian Dollar -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="AUD" data-symbol="$" data-rate="0.018">
+                            <div class="fw-bold text-dark small">Australian dollar</div>
+                            <div class="text-muted small">AUD – $</div>
+                        </button>
+                    </div>
+
+                    <!-- Canadian Dollar -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="CAD" data-symbol="$" data-rate="0.016">
+                            <div class="fw-bold text-dark small">Canadian dollar</div>
+                            <div class="text-muted small">CAD – $</div>
+                        </button>
+                    </div>
+
+                    <!-- Emirati Dirham -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="AED" data-symbol="د.إ" data-rate="0.044">
+                            <div class="fw-bold text-dark small">Emirati dirham</div>
+                            <div class="text-muted small">AED – د.إ</div>
+                        </button>
+                    </div>
+
+                    <!-- Chinese Yuan -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="CNY" data-symbol="¥" data-rate="0.086">
+                            <div class="fw-bold text-dark small">Chinese yuan</div>
+                            <div class="text-muted small">CNY – ¥</div>
+                        </button>
+                    </div>
+
+                    <!-- Japanese Yen -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="JPY" data-symbol="¥" data-rate="1.78">
+                            <div class="fw-bold text-dark small">Japanese yen</div>
+                            <div class="text-muted small">JPY – ¥</div>
+                        </button>
+                    </div>
+
+                    <!-- Swiss Franc -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="CHF" data-symbol="CHF" data-rate="0.0104">
+                            <div class="fw-bold text-dark small">Swiss franc</div>
+                            <div class="text-muted small">CHF</div>
+                        </button>
+                    </div>
+
+                    <!-- Singapore Dollar -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="SGD" data-symbol="$" data-rate="0.016">
+                            <div class="fw-bold text-dark small">Singapore dollar</div>
+                            <div class="text-muted small">SGD – $</div>
+                        </button>
+                    </div>
+
+                    <!-- Thai Baht -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="THB" data-symbol="฿" data-rate="0.42">
+                            <div class="fw-bold text-dark small">Thai baht</div>
+                            <div class="text-muted small">THB – ฿</div>
+                        </button>
+                    </div>
+
+                    <!-- Brazilian Real -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="BRL" data-symbol="R$" data-rate="0.067">
+                            <div class="fw-bold text-dark small">Brazilian real</div>
+                            <div class="text-muted small">BRL – R$</div>
+                        </button>
+                    </div>
+
+                    <!-- Qatari Riyal -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="QAR" data-symbol="ر.ق" data-rate="0.044">
+                            <div class="fw-bold text-dark small">Qatari riyal</div>
+                            <div class="text-muted small">QAR – ر.ق</div>
+                        </button>
+                    </div>
+
+                    <!-- Saudi Arabian Riyal -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="SAR" data-symbol="SR" data-rate="0.045">
+                            <div class="fw-bold text-dark small">Saudi Arabian riyal</div>
+                            <div class="text-muted small">SAR – SR</div>
+                        </button>
+                    </div>
+
+                    <!-- South Korean Won -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="KRW" data-symbol="₩" data-rate="16.2">
+                            <div class="fw-bold text-dark small">South Korean won</div>
+                            <div class="text-muted small">KRW – ₩</div>
+                        </button>
+                    </div>
+
+                    <!-- Russian Ruble -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="RUB" data-symbol="₽" data-rate="1.08">
+                            <div class="fw-bold text-dark small">Russian ruble</div>
+                            <div class="text-muted small">RUB – ₽</div>
+                        </button>
+                    </div>
+
+                    <!-- Turkish Lira -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="TRY" data-symbol="₺" data-rate="0.40">
+                            <div class="fw-bold text-dark small">Turkish lira</div>
+                            <div class="text-muted small">TRY – ₺</div>
+                        </button>
+                    </div>
+
+                    <!-- New Zealand Dollar -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="NZD" data-symbol="$" data-rate="0.020">
+                            <div class="fw-bold text-dark small">New Zealand dollar</div>
+                            <div class="text-muted small">NZD – $</div>
+                        </button>
+                    </div>
+
+                    <!-- Hong Kong Dollar -->
+                    <div class="col">
+                        <button type="button" class="currency-item-card w-100 text-start p-3 rounded-4 border btn" data-code="HKD" data-symbol="$" data-rate="0.094">
+                            <div class="fw-bold text-dark small">Hong Kong dollar</div>
+                            <div class="text-muted small">HKD – $</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

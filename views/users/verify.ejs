@@ -1,0 +1,35 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container my-5" style="max-width: 520px;">
+    <div class="form-card text-center">
+        <div class="bg-warning-subtle text-warning-emphasis rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+            <i class="fa-solid fa-mobile-screen-button fs-2"></i>
+        </div>
+        <h3 class="fw-bold mb-2">Verify Your Account</h3>
+        <p class="text-muted small mb-4">Enter the 6-digit OTP code sent to your registered Email and Phone number.</p>
+
+        <!-- Email Verification Section -->
+        <form action="/verify-email" method="POST" class="mb-4">
+            <div class="p-3 bg-light rounded-4 mb-3 text-start">
+                <label class="form-label fw-bold small text-dark"><i class="fa-solid fa-envelope text-danger me-1"></i> Email Verification Code</label>
+                <div class="input-group">
+                    <input type="text" name="emailOtp" class="form-control rounded-start-3 text-center fw-bold fs-5 tracking-wider" placeholder="1 2 3 4 5 6" maxlength="6" required>
+                    <button class="btn btn-dark fw-bold px-3" type="submit">Verify Email</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Phone OTP Section -->
+        <form action="/verify-phone" method="POST">
+            <div class="p-3 bg-light rounded-4 mb-3 text-start">
+                <label class="form-label fw-bold small text-dark"><i class="fa-solid fa-comment-sms text-success me-1"></i> Phone SMS OTP Code</label>
+                <div class="input-group">
+                    <input type="text" name="phoneOtp" class="form-control rounded-start-3 text-center fw-bold fs-5 tracking-wider" placeholder="9 8 7 6 5 4" maxlength="6" required>
+                    <button class="btn btn-success fw-bold px-3" type="submit">Verify Phone</button>
+                </div>
+            </div>
+        </form>
+
+        <a href="/listings" class="btn btn-link text-muted small text-decoration-none mt-2">Skip verification for now</a>
+    </div>
+</div>
